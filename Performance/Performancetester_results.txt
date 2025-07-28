@@ -1,0 +1,37 @@
+=== SHAMIR'S SECRET SHARING PERFORMANCE BENCHMARK ===
+Field Prime: 17014118346046923173...
+Warmup Iterations: 100
+Test Iterations: 1000
+
+| k Size | Lagrange Time | Gaussian Time | Memory (MB) | Recommended |
+|--------|---------------|---------------|-------------|-------------|
+|      3 |       0.064 ms |       0.074 ms |      0.00 |    Lagrange |
+|      5 |       0.091 ms |       0.109 ms |      0.00 |    Lagrange |
+|      7 |       0.080 ms |       0.149 ms |      0.00 |    Lagrange |
+|     10 |       0.093 ms |       0.226 ms |      0.00 |    Lagrange |
+|     15 |       0.135 ms |       0.688 ms |      0.01 |    Lagrange |
+|     20 |       0.236 ms |       1.260 ms |      0.01 |    Lagrange |
+|     25 |       0.342 ms |       2.496 ms |      0.02 |    Lagrange |
+|     30 |       0.391 ms |       4.048 ms |      0.03 |    Lagrange |
+
+
+=== SCALING ANALYSIS ===
+Theoretical vs Actual Complexity:
+
+Lagrange Scaling (should be ~O(k²)):
+k=5 to k=10: actual ratio=1.84, expected O(k²)=4.00
+k=10 to k=20: actual ratio=3.17, expected O(k²)=4.00
+k=20 to k=40: actual ratio=2.96, expected O(k²)=4.00
+
+Gaussian Scaling (should be ~O(k?)):
+k=5 to k=10: actual ratio=3.77, expected O(k?)=8.00
+k=10 to k=20: actual ratio=5.74, expected O(k?)=8.00
+k=20 to k=40: actual ratio=7.93, expected O(k?)=8.00
+
+=== NUMERICAL STABILITY TEST ===
+Test Case              | Lagrange Error | Gaussian Error | Winner
+-----------------------|----------------|----------------|--------
+Sequential points      |        Perfect |        Perfect | Lagrange
+Large gaps             |         ±86420 |         ±86420 | Lagrange
+Small differences      |      ±12345678 |      ±12345678 | Lagrange
+Random distribution    |      ±18206134 |      ±18206134 | Lagrange
